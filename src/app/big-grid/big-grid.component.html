@@ -1,0 +1,33 @@
+<div class="control-section">
+  <ejs-grid [dataSource]='data' allowPaging='true' allowSorting='true' [sortSettings]='initialSort' #gridComponent
+            [pageSettings]='pageSettings' allowExcelExport='true' allowPdfExport='true' [allowFiltering]='true'
+            [filterSettings]='filterOption' showColumnChooser='true' [toolbar]="toolbar"
+            [contextMenuItems]="contextMenuItems"
+            [allowSelection]="true" [selectionSettings]="selectOptions"
+            [editSettings]='editSettings'
+            (rowSelecting)="preventRowSelect($event);"
+            (rowSelected)="callCustomAction('rowSelected', $event);"
+            (rowDeselected)="callCustomAction('rowDeselected', $event)"
+            (actionBegin)="callCustomAction('actionBegin', $event)"
+            (actionComplete)="callCustomAction('actionComplete', $event)"
+            (toolbarClick)="callCustomAction('toolbarClick', $event)"
+            (beginEdit)="callCustomAction('beginEdit', $event)"
+            (queryCellInfo)="callCustomAction('queryCellInfo', $event)"
+            (rowDataBound)="callCustomAction('rowDataBound', $event)"
+            (dataBound)="callCustomAction('dataBound', $event)">
+    <e-columns>
+      <e-column type='checkbox' width='50'></e-column>
+      <e-column field='OrderID' headerText='Order ID' width='120' textAlign='Right'></e-column>
+      <e-column field='CustomerName' headerText='Customer Name' width='150'>
+        <ng-template #template let-data>
+          <p>Customer name is {{data.CustomerName}}</p>
+        </ng-template>
+      </e-column>
+      <e-column field='OrderDate' headerText='Order Date' width='130' format="dMy" textAlign='Right'></e-column>
+      <e-column field='Freight' headerText='Freight' width='120' format='C2' textAlign='Right'></e-column>
+      <e-column field='ShippedDate' headerText='Shipped Date' width='130' format="yMd"
+                textAlign='Right'></e-column>
+      <e-column field='ShipCountry' headerText='Ship Country' width='150'></e-column>
+    </e-columns>
+  </ejs-grid>
+</div>
